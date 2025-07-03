@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ Thống Nhận Quà TikTok - Slot Mặc Định 0</title>
+    <title>Hệ Thống Nhận Quà TikTok - Slot Mặc Định 0 & Giới Hạn Quà</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -659,85 +659,6 @@
             text-transform: uppercase;
         }
         
-        /* Gift Limits */
-        .gift-limit-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            padding: 25px;
-            margin-bottom: 25px;
-        }
-        
-        .gift-limit-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .gift-limit-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .gift-limit-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .gift-limit-name {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 500;
-        }
-        
-        .gift-limit-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-        
-        .icon-likes {
-            background: #fee2e2;
-            color: #ef4444;
-        }
-        
-        .icon-views {
-            background: #dbeafe;
-            color: #3b82f6;
-        }
-        
-        .icon-comments {
-            background: #ecfccb;
-            color: #65a30d;
-        }
-        
-        .icon-shares {
-            background: #fce7f3;
-            color: #ec4899;
-        }
-        
-        .gift-limit-controls {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .gift-limit-value {
-            font-weight: 600;
-            min-width: 60px;
-            text-align: center;
-        }
-        
         /* Responsive */
         @media (max-width: 992px) {
             .sidebar {
@@ -801,17 +722,6 @@
             .timer-display {
                 flex-wrap: wrap;
             }
-            
-            .gift-limit-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .gift-limit-controls {
-                width: 100%;
-                justify-content: space-between;
-            }
         }
     </style>
 </head>
@@ -845,13 +755,13 @@
                     <i class="fas fa-gift"></i>
                     <span>Yêu Cầu Quà</span>
                 </a>
-                <a href="#" class="sidebar-item" id="gift-link">
-                    <i class="fas fa-star"></i>
-                    <span>Quản Lý Quà</span>
-                </a>
                 <a href="#" class="sidebar-item" id="event-link">
                     <i class="fas fa-calendar-alt"></i>
                     <span>Sự Kiện & Slot</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <i class="fas fa-users"></i>
+                    <span>Người Dùng</span>
                 </a>
                 <a href="#" class="sidebar-item">
                     <i class="fas fa-sign-out-alt"></i>
@@ -953,14 +863,17 @@
                                     <label class="form-label">Loại Tăng <span style="color: var(--danger);">*</span></label>
                                     <select class="form-control" id="gift-type" required>
                                         <option value="">Chọn loại tăng</option>
-                                        <!-- Gift types will be loaded dynamically -->
+                                        <option value="likes">Tăng Tim (Likes)</option>
+                                        <option value="views">Tăng Lượt Xem (Views)</option>
+                                        <option value="comments">Tăng Bình Luận</option>
+                                        <option value="shares">Tăng Chia Sẻ</option>
                                     </select>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label class="form-label">Số Lượng <span style="color: var(--danger);">*</span></label>
-                                    <input type="number" class="form-control" id="quantity" min="100" max="10000" placeholder="Từ 100 đến 10,000" required>
-                                    <small class="text-muted" id="gift-limit-text">Giới hạn: 0 lượt</small>
+                                    <input type="number" class="form-control" id="quantity" min="100" placeholder="Từ 100 đến 500" required>
+                                    <small class="text-muted" id="quantity-hint">Tối đa: 500</small>
                                 </div>
                                 
                                 <div class="form-group">
@@ -977,16 +890,15 @@
                     
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Điều Kiện Nhận Quà</h3>
+                            <h3 class="card-title">Giới Hạn Quà Tặng</h3>
                             <i class="fas fa-clipboard-list" style="color: var(--primary);"></i>
                         </div>
                         <div class="card-body">
                             <ul style="padding-left: 20px; line-height: 2.5;">
-                                <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Link video TikTok phải hợp lệ và thuộc sở hữu của bạn</li>
-                                <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Mỗi người chỉ được gửi yêu cầu 1 lần duy nhất</li>
-                                <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Số lượng tim/view tối thiểu là 100, tối đa là 10,000</li>
-                                <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Yêu cầu sẽ được admin xét duyệt trong vòng 24-48 giờ</li>
-                                <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Quà tặng có thể bị hủy nếu phát hiện gian lận</li>
+                                <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Tăng Tim: Tối đa 500 tim</li>
+                                <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Tăng View: Tối đa 1000 view</li>
+                                <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Tăng Bình Luận: Tối đa 300 bình luận</li>
+                                <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Tăng Chia Sẻ: Tối đa 200 chia sẻ</li>
                             </ul>
                         </div>
                     </div>
@@ -1036,6 +948,30 @@
                                 </div>
                                 
                                 <div class="form-group">
+                                    <label class="form-label">Giới Hạn Quà Tặng</label>
+                                    <div class="row" style="display: flex; gap: 15px; margin-top: 10px;">
+                                        <div class="col" style="flex: 1;">
+                                            <label class="form-label">Tăng Tim (Max)</label>
+                                            <input type="number" class="form-control" id="likes-limit" value="500" min="100" max="5000">
+                                        </div>
+                                        <div class="col" style="flex: 1;">
+                                            <label class="form-label">Tăng View (Max)</label>
+                                            <input type="number" class="form-control" id="views-limit" value="1000" min="100" max="5000">
+                                        </div>
+                                    </div>
+                                    <div class="row" style="display: flex; gap: 15px; margin-top: 10px;">
+                                        <div class="col" style="flex: 1;">
+                                            <label class="form-label">Tăng Bình Luận (Max)</label>
+                                            <input type="number" class="form-control" id="comments-limit" value="300" min="100" max="5000">
+                                        </div>
+                                        <div class="col" style="flex: 1;">
+                                            <label class="form-label">Tăng Chia Sẻ (Max)</label>
+                                            <input type="number" class="form-control" id="shares-limit" value="200" min="100" max="5000">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
                                     <label class="form-label">Thời Gian Bắt Đầu Sự Kiện</label>
                                     <input type="datetime-local" class="form-control" id="start-date" value="2025-07-01T00:00">
                                 </div>
@@ -1048,26 +984,6 @@
                                 <button class="btn btn-primary" id="save-event-btn">
                                     <i class="fas fa-save"></i> Lưu Cài Đặt Sự Kiện
                                 </button>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Quản Lý Loại Quà Tặng</h3>
-                                <button class="btn btn-success" id="add-gift-type-btn">
-                                    <i class="fas fa-plus"></i> Thêm Loại Quà
-                                </button>
-                            </div>
-                            <div class="card-body">
-                                <div class="gift-limit-card">
-                                    <div class="gift-limit-header">
-                                        <h4 class="gift-limit-title">Giới hạn số lượng cho từng loại quà</h4>
-                                    </div>
-                                    
-                                    <div id="gift-limits-container">
-                                        <!-- Gift limits will be loaded dynamically -->
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -1164,7 +1080,6 @@
         // Data structure for gift requests and event settings
         const GIFT_REQUESTS_KEY = 'tiktok_gift_requests';
         const EVENT_SETTINGS_KEY = 'tiktok_event_settings';
-        const GIFT_TYPES_KEY = 'tiktok_gift_types';
         const ADMIN_PASSWORD = 'admin123'; // Simple admin password for demo
         
         // Initialize data if not exists
@@ -1196,54 +1111,21 @@
             localStorage.setItem(GIFT_REQUESTS_KEY, JSON.stringify(sampleRequests));
         }
         
-        // Initialize event settings with default 0 slots
+        // Initialize event settings with default 0 slots and gift limits
         if (!localStorage.getItem(EVENT_SETTINGS_KEY)) {
             const eventSettings = {
                 totalSlots: 0,
-                usedSlots: 0,
+                usedSlots: 0, // Mặc định là 0
                 startDate: new Date('2025-07-01T00:00:00').toISOString(),
-                endDate: new Date('2025-07-15T23:59:59').toISOString()
+                endDate: new Date('2025-07-15T23:59:59').toISOString(),
+                giftLimits: {
+                    likes: 500,
+                    views: 1000,
+                    comments: 300,
+                    shares: 200
+                }
             };
             localStorage.setItem(EVENT_SETTINGS_KEY, JSON.stringify(eventSettings));
-        }
-        
-        // Initialize gift types
-        if (!localStorage.getItem(GIFT_TYPES_KEY)) {
-            const giftTypes = [
-                {
-                    id: 'likes',
-                    name: 'Tăng Tim (Likes)',
-                    max: 1000,
-                    used: 0,
-                    icon: 'fas fa-heart',
-                    iconClass: 'icon-likes'
-                },
-                {
-                    id: 'views',
-                    name: 'Tăng Lượt Xem (Views)',
-                    max: 2000,
-                    used: 0,
-                    icon: 'fas fa-eye',
-                    iconClass: 'icon-views'
-                },
-                {
-                    id: 'comments',
-                    name: 'Tăng Bình Luận',
-                    max: 500,
-                    used: 0,
-                    icon: 'fas fa-comment',
-                    iconClass: 'icon-comments'
-                },
-                {
-                    id: 'shares',
-                    name: 'Tăng Chia Sẻ',
-                    max: 300,
-                    used: 0,
-                    icon: 'fas fa-share-alt',
-                    iconClass: 'icon-shares'
-                }
-            ];
-            localStorage.setItem(GIFT_TYPES_KEY, JSON.stringify(giftTypes));
         }
         
         // Get all gift requests
@@ -1264,16 +1146,6 @@
         // Save event settings
         function saveEventSettings(settings) {
             localStorage.setItem(EVENT_SETTINGS_KEY, JSON.stringify(settings));
-        }
-        
-        // Get gift types
-        function getGiftTypes() {
-            return JSON.parse(localStorage.getItem(GIFT_TYPES_KEY)) || [];
-        }
-        
-        // Save gift types
-        function saveGiftTypes(types) {
-            localStorage.setItem(GIFT_TYPES_KEY, JSON.stringify(types));
         }
         
         // Add a new gift request
@@ -1375,6 +1247,12 @@
                 document.getElementById('start-date').value = new Date(settings.startDate).toISOString().slice(0, 16);
                 document.getElementById('end-date').value = new Date(settings.endDate).toISOString().slice(0, 16);
                 
+                // Update gift limits
+                document.getElementById('likes-limit').value = settings.giftLimits.likes;
+                document.getElementById('views-limit').value = settings.giftLimits.views;
+                document.getElementById('comments-limit').value = settings.giftLimits.comments;
+                document.getElementById('shares-limit').value = settings.giftLimits.shares;
+                
                 // Update admin alert
                 const adminAlert = document.querySelector('#admin-dashboard .alert');
                 if (availableSlots === 0) {
@@ -1397,6 +1275,21 @@
                     adminAlert.classList.add('alert-info');
                 }
             }
+        }
+        
+        // Update gift type hint
+        function updateGiftTypeHint() {
+            const giftType = document.getElementById('gift-type').value;
+            const settings = getEventSettings();
+            let maxLimit = 500;
+            
+            if (giftType && settings.giftLimits) {
+                maxLimit = settings.giftLimits[giftType] || 500;
+            }
+            
+            document.getElementById('quantity').placeholder = `Từ 100 đến ${maxLimit}`;
+            document.getElementById('quantity').max = maxLimit;
+            document.getElementById('quantity-hint').textContent = `Tối đa: ${maxLimit}`;
         }
         
         // Update event timer
@@ -1426,79 +1319,6 @@
             document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
             document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
             document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
-        
-        // Update gift types in form
-        function updateGiftTypesForm() {
-            const giftTypes = getGiftTypes();
-            const giftTypeSelect = document.getElementById('gift-type');
-            
-            // Clear existing options
-            giftTypeSelect.innerHTML = '<option value="">Chọn loại tăng</option>';
-            
-            // Add new options
-            giftTypes.forEach(type => {
-                const option = document.createElement('option');
-                option.value = type.id;
-                option.textContent = type.name;
-                giftTypeSelect.appendChild(option);
-            });
-        }
-        
-        // Update gift limits display
-        function updateGiftLimits() {
-            const giftTypes = getGiftTypes();
-            const container = document.getElementById('gift-limits-container');
-            container.innerHTML = '';
-            
-            giftTypes.forEach(type => {
-                const item = document.createElement('div');
-                item.className = 'gift-limit-item';
-                item.innerHTML = `
-                    <div class="gift-limit-name">
-                        <div class="gift-limit-icon ${type.iconClass}">
-                            <i class="${type.icon}"></i>
-                        </div>
-                        <span>${type.name}</span>
-                    </div>
-                    <div class="gift-limit-controls">
-                        <div class="gift-limit-value">${type.used}/${type.max}</div>
-                        <div>
-                            <button class="btn btn-sm btn-primary edit-gift-btn" data-id="${type.id}">
-                                <i class="fas fa-edit"></i> Chỉnh sửa
-                            </button>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(item);
-            });
-            
-            // Add event listeners to edit buttons
-            document.querySelectorAll('.edit-gift-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    const giftTypes = getGiftTypes();
-                    const gift = giftTypes.find(t => t.id === id);
-                    
-                    if (gift) {
-                        const newMax = prompt(`Nhập giới hạn mới cho ${gift.name}:`, gift.max);
-                        if (newMax !== null) {
-                            const maxValue = parseInt(newMax);
-                            if (!isNaN(maxValue) && maxValue >= 0) {
-                                gift.max = maxValue;
-                                saveGiftTypes(giftTypes);
-                                updateGiftLimits();
-                                updateGiftTypesForm();
-                                
-                                document.getElementById('admin-success-message').textContent = `Đã cập nhật giới hạn cho ${gift.name}!`;
-                                document.getElementById('admin-success-modal').classList.add('active');
-                            } else {
-                                alert("Vui lòng nhập số hợp lệ!");
-                            }
-                        }
-                    }
-                });
-            });
         }
         
         // Page switching functionality
@@ -1597,14 +1417,25 @@
                 return;
             }
             
+            // Get gift type and quantity
+            const giftType = document.getElementById('gift-type').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            
+            // Validate quantity against gift limit
+            const giftLimit = settings.giftLimits[giftType] || 500;
+            if (quantity > giftLimit) {
+                alert(`Số lượng vượt quá giới hạn cho loại quà này (tối đa ${giftLimit})!`);
+                return;
+            }
+            
             // Create request object
             const request = {
                 id: Date.now(),
                 name: document.getElementById('fullname').value,
                 email: document.getElementById('email').value,
                 tiktokLink: document.getElementById('tiktok-link').value,
-                giftType: document.getElementById('gift-type').value,
-                quantity: parseInt(document.getElementById('quantity').value),
+                giftType: giftType,
+                quantity: quantity,
                 message: document.getElementById('message').value,
                 date: new Date().toISOString(),
                 status: "pending"
@@ -1631,6 +1462,14 @@
             settings.startDate = new Date(document.getElementById('start-date').value).toISOString();
             settings.endDate = new Date(document.getElementById('end-date').value).toISOString();
             
+            // Update gift limits
+            settings.giftLimits = {
+                likes: parseInt(document.getElementById('likes-limit').value) || 500,
+                views: parseInt(document.getElementById('views-limit').value) || 1000,
+                comments: parseInt(document.getElementById('comments-limit').value) || 300,
+                shares: parseInt(document.getElementById('shares-limit').value) || 200
+            };
+            
             saveEventSettings(settings);
             updateSlotCounter();
             
@@ -1654,34 +1493,6 @@
                 } else {
                     alert("Vui lòng nhập số lượng hợp lệ!");
                 }
-            }
-        });
-        
-        // Add gift type button
-        document.getElementById('add-gift-type-btn').addEventListener('click', function() {
-            const name = prompt("Nhập tên loại quà mới:", "Tăng Followers");
-            if (name && name.trim() !== '') {
-                const id = name.toLowerCase().replace(/\s+/g, '-');
-                const max = parseInt(prompt("Nhập giới hạn số lượng cho loại quà này:", "500") || "0");
-                
-                const newGiftType = {
-                    id: id,
-                    name: name,
-                    max: max,
-                    used: 0,
-                    icon: 'fas fa-gift',
-                    iconClass: 'icon-blue'
-                };
-                
-                const giftTypes = getGiftTypes();
-                giftTypes.push(newGiftType);
-                saveGiftTypes(giftTypes);
-                
-                updateGiftLimits();
-                updateGiftTypesForm();
-                
-                document.getElementById('admin-success-message').textContent = `Đã thêm loại quà "${name}" thành công!`;
-                document.getElementById('admin-success-modal').classList.add('active');
             }
         });
         
@@ -1766,9 +1577,6 @@
             // Update event settings in admin panel
             updateSlotCounter();
             
-            // Update gift limits
-            updateGiftLimits();
-            
             // Update requests table
             const tableBody = document.getElementById('requests-body');
             tableBody.innerHTML = '';
@@ -1786,15 +1594,12 @@
                     statusBadge = `<span class="status-badge status-pending">Chờ duyệt</span>`;
                 }
                 
-                const giftTypes = getGiftTypes();
-                const giftType = giftTypes.find(t => t.id === request.giftType) || {name: request.giftType};
-                
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${request.name}</td>
                     <td>${request.email}</td>
                     <td><a href="${request.tiktokLink}" target="_blank">Xem video</a></td>
-                    <td>${giftType.name}</td>
+                    <td>${getGiftTypeName(request.giftType)}</td>
                     <td>${request.quantity}</td>
                     <td>${formattedDate}</td>
                     <td>${statusBadge}</td>
@@ -1851,12 +1656,28 @@
             });
         }
         
+        // Helper function to get gift type name
+        function getGiftTypeName(type) {
+            switch(type) {
+                case 'likes': return 'Tăng Tim';
+                case 'views': return 'Tăng View';
+                case 'comments': return 'Tăng Bình Luận';
+                case 'shares': return 'Tăng Chia Sẻ';
+                default: return type;
+            }
+        }
+        
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
             updateSlotCounter();
             updateEventTimer();
-            updateGiftTypesForm();
             setInterval(updateEventTimer, 1000);
+            
+            // Update gift type hint when selection changes
+            document.getElementById('gift-type').addEventListener('change', updateGiftTypeHint);
+            
+            // Initial update
+            updateGiftTypeHint();
         });
     </script>
 </body>
